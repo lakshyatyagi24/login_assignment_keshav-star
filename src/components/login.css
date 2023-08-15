@@ -91,6 +91,16 @@ a:hover{
     background-color: rgb(35, 162, 35);
 }
 
+.logout{
+    border: none;
+    width: 48%;
+    border-radius: 7px;
+    height: 2.4rem;
+    cursor: pointer;
+    color: white;
+    background-color: rgb(35, 162, 35);
+}
+
 #signup {
     color: rgba(0,0,0,0.3);
 }

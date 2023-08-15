@@ -3,29 +3,39 @@ import './login.css'
 import loginImage from '../assets/bg.png'
 import google from '../assets/google.png'
 import linkedin from '../assets/linkedin.png'
+import { useDispatch } from 'react-redux'
+import { login } from '../features/userSlice'
 
 const Login = () => {
 
     const email = useRef(null);
     const password = useRef(null);
 
+    const dispatch = useDispatch();
+
     function tooglepassword() {
         let eye = document.getElementById('eye');
         let hidepasswordstatus = document.getElementById('password');
-        if(eye.classList.contains('fa-eye-slash')){
-            eye.classList.replace('fa-eye-slash','fa-eye');
-            hidepasswordstatus.type='text';
+        if (eye.classList.contains('fa-eye-slash')) {
+            eye.classList.replace('fa-eye-slash', 'fa-eye');
+            hidepasswordstatus.type = 'text';
         }
-        else{
-            eye.classList.replace('fa-eye','fa-eye-slash');
-            hidepasswordstatus.type='password';
+        else {
+            eye.classList.replace('fa-eye', 'fa-eye-slash');
+            hidepasswordstatus.type = 'password';
         }
-        
+
     }
 
-    function LoginRequested(e){
+    function handleSubmit(e) {
         e.preventDefault();
-        console.log(email.current.value,password.current.value)
+
+        dispatch(login({
+            email: email.current.value,
+            password: password.current.value,
+            loggedin: true,
+        })
+        );
     }
 
     return (
@@ -35,7 +45,7 @@ const Login = () => {
                     <img src={loginImage} alt="" />
                 </div>
                 <div className="login-container">
-                    <form id='form' action="">
+                    <form id='form' onSubmit={(e) => handleSubmit(e)} action="">
                         <h1>Login to continue</h1>
                         <div>
                             <label htmlFor="email">Email Address <span>*</span></label>
@@ -52,13 +62,13 @@ const Login = () => {
                             <a href="#" className="forgot">Forgot password</a>
                         </div>
                         <div className="buttons">
-                            <button onClick={LoginRequested} id='login'>Login</button>
+                            <button type='submit' id='login'>Login</button>
                             <button id='signup'>Sign Up</button>
                         </div>
                         <p className='or'>or</p>
                         <div className="authentication">
                             <div className="google">
-                            <img src={google} alt="" />
+                                <img src={google} alt="" />
                                 <span>login with Google</span>
                             </div>
                             <div className="linkedin">
